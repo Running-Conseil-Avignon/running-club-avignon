@@ -352,8 +352,9 @@ const CONFIG = {
   niveaux: ['Débutant', 'Intermédiaire', 'Confirmé', 'Expert'],
   statutsTesting: ['Brouillon', 'Ouvert', 'Inscriptions closes', 'Terminé', 'Annulé'],
   // Membres : textes affichés sur le site (les règles elles-mêmes sont dans Membres.gs)
-  consentMembre: "Je deviens membre du Running Club Avignon : Running Conseil Avignon conserve mon profil pour faciliter mes inscriptions, me prévenir des nouveaux événements par e-mail et suivre ma fidélité. Je peux me désabonner et faire supprimer mes données à tout moment.",
-  avantagesMembre: "Alerte e-mail à chaque nouvel event, inscription en 1 clic, avant-première 24 h avant tout le monde et un bon de 20 € (dès 40 € d'achat) toutes les 5 participations."
+  fidelite: false,   // bons fidélité désactivés (mettre true pour les réafficher, et FIDELITE: true dans Membres.gs)
+  consentMembre: "Je deviens membre du Running Club Avignon : Running Conseil Avignon conserve mon profil pour faciliter mes inscriptions, me prévenir des nouveaux événements par e-mail et suivre mes participations. Je peux me désabonner et faire supprimer mes données à tout moment.",
+  avantagesMembre: "Alerte e-mail à chaque nouvel event, inscription en 1 clic et avant-première 24 h avant tout le monde."
 };
 
 /* QR code — encodeur autonome (mode octet, correction M). Algorithme d'après la norme ISO/IEC 18004. */
@@ -856,7 +857,7 @@ function vConfirm() {
       ${t.pointRdv ? `<span>${ico('flagc')} RDV : ${esc(t.pointRdv)}</span>` : ''}
     </div>
     ${r.memberPending ? `<div class="notice info" style="text-align:left">${ico('mail')} <b>Dernière étape pour devenir membre :</b> clique sur le lien envoyé à <b>${esc(r.memberPending)}</b> (pense à regarder tes spams).${S.demoTok ? `<br><button class="btn btn-dark btn-sm" style="margin-top:8px" data-act="demoConfirm">Démo : simuler le clic dans l'e-mail</button>` : ''}</div>` : ''}
-    ${isMember() && !wait ? `<div class="notice info" style="text-align:left">${ico('gift')} Pense à te faire pointer présent·e le jour J : chaque participation compte pour ton bon de ${esc((S.member.fidelite || {}).recompense || '20 €')}.</div>` : ''}
+    ${CONFIG.fidelite && isMember() && !wait ? `<div class="notice info" style="text-align:left">${ico('gift')} Pense à te faire pointer présent·e le jour J : chaque participation compte pour ton bon de ${esc((S.member.fidelite || {}).recompense || '20 €')}.</div>` : ''}
     <div class="cta" style="justify-content:center;border:0;padding-top:0">
       ${t.date ? `<a class="btn btn-primary" href="${gcalLink(t)}" target="_blank" rel="noopener">${ico('cal')} Ajouter à mon agenda</a>` : ''}
       <button class="btn btn-ghost" data-act="home">Voir les autres testings</button>
@@ -1271,11 +1272,11 @@ function memberBar() {
       <div class="mhead"><span class="mav">${esc((m.prenom || '?').charAt(0))}</span>
         <div><b>Salut ${esc(m.prenom)} !</b><small>Membre Running Club Avignon · inscription en 1 clic et avant-première</small></div>
         <button class="btn btn-ghost btn-sm" data-act="profil">${ico('user')} Mon profil</button></div>
-      <div class="loyal">
+      ${CONFIG.fidelite ? `<div class="loyal">
         <div class="lt">${ico('gift')}<span><b>${cur}/${obj}</b> participation${cur > 1 ? 's' : ''} avant ton prochain bon de ${esc(f.recompense || '20 €')} <span style="color:var(--grey)">(présence pointée)</span></span></div>
         <div class="bar"><i style="width:${Math.round(cur / obj * 100)}%"></i></div>
         ${dispo.length ? `<div class="lt ok" style="margin:10px 0 0">${ico('check')}<span>${dispo.length > 1 ? 'Tes bons' : 'Ton bon'} à utiliser en boutique : <b>${dispo.map(esc).join(', ')}</b></span></div>` : ''}
-      </div></div>`;
+      </div>` : ''}</div>`;
   }
   return `<div class="card mbar">
     <div class="mhead"><span class="mico">${ico('bell')}</span>
@@ -1323,11 +1324,11 @@ function vProfil() {
   <button class="back" data-act="home">${ico('left')} Tous les events</button>
   <div class="card mbar">
     <div class="mhead"><span class="mav">${esc((m.prenom || '?').charAt(0))}</span><div><b>${esc(m.prenom)} ${esc(m.nom)}</b><small>${esc(m.email)} · membre Running Club Avignon</small></div></div>
-    <div class="loyal">
+    ${CONFIG.fidelite ? `<div class="loyal">
       <div class="lt">${ico('gift')}<span><b>${n}</b> participation${n > 1 ? 's' : ''} pointée${n > 1 ? 's' : ''} · un bon de ${esc(f.recompense || '20 €')} toutes les ${obj}</span></div>
       <div class="bar"><i style="width:${Math.round((n % obj) / obj * 100)}%"></i></div>
       ${bons.length ? `<div style="margin-top:10px;font-size:13.5px">${bons.map(b => `<div class="lt ${b.utiliseLe ? '' : 'ok'}" style="margin:4px 0">${ico(b.utiliseLe ? 'check' : 'gift')}<span>Bon <b>${esc(b.code)}</b> · ${b.utiliseLe ? 'utilisé' : 'à présenter en boutique'}</span></div>`).join('')}</div>` : ''}
-    </div>
+    </div>` : ''}
   </div>
   <form id="profForm" class="card form" novalidate>
     <p class="kicker">Mon profil membre</p>
@@ -1369,7 +1370,7 @@ async function submitProfil(f) {
 function vUnsub() {
   if (S.unsubDone) return `<div class="card done"><div class="big">${ico('check')}</div><p class="kicker">Désabonnement</p><h2 class="h2">C'est fait.</h2><p class="lead" style="margin:8px auto 0">Tu ne recevras plus d'e-mails et ton profil membre a été supprimé. Tu restes le/la bienvenu·e à tous nos events !</p><div class="cta" style="justify-content:center;border:0"><button class="btn btn-primary" data-act="home">Voir les events</button></div></div>`;
   return `<div class="card done"><div class="big wait">${ico('bell')}</div><p class="kicker">Désabonnement</p><h2 class="h2">Quitter les membres du Running Club Avignon ?</h2>
-    <p class="lead" style="margin:8px auto 0">Tu ne recevras plus les nouveaux events par e-mail, et ton profil (infos d'inscription, fidélité) sera supprimé.</p>
+    <p class="lead" style="margin:8px auto 0">Tu ne recevras plus les nouveaux events par e-mail, et ton profil (infos d'inscription, participations) sera supprimé.</p>
     <div class="cta" style="justify-content:center;border:0"><button class="btn btn-dark" data-act="unsubConfirm" id="unsubBtn">Confirmer mon désabonnement</button><button class="btn btn-ghost" data-act="home">Annuler</button></div></div>`;
 }
 async function doUnsub(tok) {
@@ -1439,17 +1440,17 @@ function vAdminMembres() {
     <div class="card stat accent"><div class="n">${actifs.length}</div><div class="l">Membres actifs</div></div>
     <div class="card stat"><div class="n">${att.length}</div><div class="l">En attente de confirmation</div></div>
     <div class="card stat"><div class="n">${d.fileAttente || 0}</div><div class="l">E-mails en file</div></div>
-    <div class="card stat"><div class="n">${bons.filter(b => !b.utiliseLe).length}<small>/${bons.length}</small></div><div class="l">Bons à utiliser</div></div>
+    ${CONFIG.fidelite ? `<div class="card stat"><div class="n">${bons.filter(b => !b.utiliseLe).length}<small>/${bons.length}</small></div><div class="l">Bons à utiliser</div></div>` : ''}
   </div>
   <div class="sectionhead"><div class="h3" style="margin:0">Membres</div><div class="actions">
     <button class="btn btn-ghost btn-sm" data-act="mTick">${ico('mail')} Envoyer la file maintenant</button>
     <button class="btn btn-ghost btn-sm" data-act="mExport">${ico('dl')} Export CSV</button>
   </div></div>
-  <div style="font-size:13px;color:var(--grey);margin:-6px 0 12px">Avant-première : ${d.config ? d.config.avantPremiereH : 24} h · un bon tous les ${d.config ? d.config.objectif : 5} participations pointées · quota e-mails restant aujourd'hui : ${d.quota ?? '–'}</div>
-  ${rows.length ? `<div class="card tscroll"><table class="mtable"><thead><tr><th>Membre</th><th>Contact</th><th>Club</th><th>Membre depuis</th><th>Participations</th><th>Bons</th></tr></thead><tbody>
-    ${rows.map(m => `<tr><td><b>${esc(m.prenom)} ${esc(m.nom)}</b></td><td>${esc(m.email)}<br><span style="color:var(--grey)">${esc(m.telephone)}</span></td><td>${esc(m.club)}</td><td>${esc(String(m.confirmeLe || m.creeLe).slice(0, 10))}</td><td>${m.participations || 0}</td><td>${m.bons || 0}</td></tr>`).join('')}
+  <div style="font-size:13px;color:var(--grey);margin:-6px 0 12px">Avant-première : ${d.config ? d.config.avantPremiereH : 24} h${CONFIG.fidelite ? ` · un bon toutes les ${d.config ? d.config.objectif : 5} participations pointées` : ''} · quota e-mails restant aujourd'hui : ${d.quota ?? '–'}</div>
+  ${rows.length ? `<div class="card tscroll"><table class="mtable"><thead><tr><th>Membre</th><th>Contact</th><th>Club</th><th>Membre depuis</th><th>Participations</th>${CONFIG.fidelite ? '<th>Bons</th>' : ''}</tr></thead><tbody>
+    ${rows.map(m => `<tr><td><b>${esc(m.prenom)} ${esc(m.nom)}</b></td><td>${esc(m.email)}<br><span style="color:var(--grey)">${esc(m.telephone)}</span></td><td>${esc(m.club)}</td><td>${esc(String(m.confirmeLe || m.creeLe).slice(0, 10))}</td><td>${m.participations || 0}</td>${CONFIG.fidelite ? `<td>${m.bons || 0}</td>` : ''}</tr>`).join('')}
   </tbody></table></div>` : `<div class="card empty"><b>Pas encore de membre</b>Le bouton « Être prévenu·e » est affiché sur la page d'accueil.</div>`}
-  ${bons.length ? `<div class="sectionhead" style="margin-top:18px"><div class="h3" style="margin:0">Bons fidélité émis</div></div>
+  ${CONFIG.fidelite && bons.length ? `<div class="sectionhead" style="margin-top:18px"><div class="h3" style="margin:0">Bons fidélité émis</div></div>
   <div class="card tscroll"><table class="mtable"><thead><tr><th>Code</th><th>Membre</th><th>Émis le</th><th>Statut</th></tr></thead><tbody>
     ${bons.slice().reverse().map(b => `<tr><td><b>${esc(b.code)}</b></td><td>${esc(b.prenom)} ${esc(b.nom)}</td><td>${esc(String(b.creeLe).slice(0, 10))}</td><td>${b.utiliseLe ? `Utilisé le ${esc(String(b.utiliseLe).slice(0, 10))}` : `<button class="btn btn-dark btn-sm" data-act="mBonUse" data-id="${esc(b.code)}">Marquer utilisé</button>`}</td></tr>`).join('')}
   </tbody></table></div>` : ''}`;
