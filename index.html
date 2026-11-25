@@ -33,10 +33,12 @@ a{color:var(--blue-d)}
 /* Header */
 header.top{background:var(--black);color:#fff;position:sticky;top:0;z-index:20}
 .top .wrap{display:flex;align-items:center;gap:14px;height:62px}
-.logo{height:40px;width:auto;display:block}
+.logo{height:26px;width:auto;display:block}
 .logo-fb{font:800 18px/1 var(--fh);letter-spacing:-.3px}
 .logo-fb b{color:var(--blue)}
 .brand-sep{width:1px;height:28px;background:#3a3944}
+.brand-by{font:italic 600 11px var(--fb);color:#a9a9b2;margin:0 -6px 0 2px;align-self:center}
+#logoSlot{display:flex;align-items:center}
 .brand-app{font:900 17px/1 var(--fh);text-transform:uppercase;letter-spacing:-.2px;color:#fff}
 .brand-app b{font-weight:900;display:block;white-space:nowrap}
 .brand-app b span{color:var(--blue)}
@@ -49,9 +51,10 @@ header.top{background:var(--black);color:#fff;position:sticky;top:0;z-index:20}
 .navbtn:hover{color:#fff}
 .navbtn.on{color:#fff}
 .navbtn.on::after{transform:scaleX(1)}
-#navAdmin{border:1.5px solid #3a3946;border-radius:8px;padding:8px 12px;margin-left:6px}
-#navAdmin::after{display:none}
-#navAdmin:hover,#navAdmin.on{border-color:var(--blue);color:var(--blue)}
+#navHome,#navAdmin{border:1.5px solid #3a3946;border-radius:8px;padding:8px 12px;margin-left:6px}
+#navHome::after,#navAdmin::after{display:none}
+#navHome:hover,#navAdmin:hover{border-color:var(--blue);color:var(--blue)}
+#navHome.on,#navAdmin.on{border-color:var(--blue);color:#fff;background:rgba(0,159,227,.14)}
 .topline{background:#fff;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--grey);text-align:center;padding:6px 12px}
 .topline b{color:var(--ink)}
 #demo{background:var(--lime);color:var(--ink);font-size:12.5px;text-align:center;padding:6px 12px;font-weight:600}
@@ -366,7 +369,8 @@ body:not(.dark) .hero2 .hk,body:not(.dark) .hero2 .hh{color:var(--ink)}
   .h1{font-size:25px}
   .brand-sep,.topline{display:none}
   .top .wrap{gap:10px}
-  .logo{height:30px}
+  .logo{height:22px}
+  .brand-by{font-size:9.5px;margin:0 -4px 0 0}
   .logo-fb{font-size:15px;white-space:nowrap}
   .brand-app{font-size:13px}
   .brand-app small{font-size:8.5px;letter-spacing:3px;margin-top:4px}
@@ -374,7 +378,7 @@ body:not(.dark) .hero2 .hk,body:not(.dark) .hero2 .hh{color:var(--ink)}
   .navbtn{padding:8px 6px;font-size:11px;letter-spacing:1px;gap:5px}
   .navbtn svg{display:none}
   .navbtn::after{left:6px;right:6px}
-  #navAdmin{padding:6px 8px;margin-left:2px}
+  #navHome,#navAdmin{padding:6px 8px;margin-left:2px}
   .arow{flex-wrap:wrap}.arow .actions{width:100%;justify-content:flex-start}
   .prow{flex-direction:column}.pact{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
   .hbar{grid-template-columns:110px 1fr 34px}
@@ -386,9 +390,9 @@ body:not(.dark) .hero2 .hk,body:not(.dark) .hero2 .hh{color:var(--ink)}
 <div id="demo" hidden>Mode démo : données d'exemple, rien n'est enregistré. Code organisateur : <b>demo</b> · Membre de démo : <b>ines.martin@exemple.fr</b></div>
 <header class="top">
   <div class="wrap">
-    <span id="logoSlot"></span>
-    <span class="brand-sep"></span>
     <div class="brand-app"><b>Running <span>Club</span></b><small><i></i>Avignon</small></div>
+    <span class="brand-by">by</span>
+    <span id="logoSlot"></span>
     <nav>
       <button class="navbtn" data-act="home" id="navHome"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Testings</button>
       <button class="navbtn" data-act="admin" id="navAdmin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Orga</button>
