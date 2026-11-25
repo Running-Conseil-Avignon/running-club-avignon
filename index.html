@@ -33,15 +33,25 @@ a{color:var(--blue-d)}
 /* Header */
 header.top{background:var(--black);color:#fff;position:sticky;top:0;z-index:20}
 .top .wrap{display:flex;align-items:center;gap:14px;height:62px}
-.logo{height:30px;width:auto;display:block}
+.logo{height:40px;width:auto;display:block}
 .logo-fb{font:800 18px/1 var(--fh);letter-spacing:-.3px}
 .logo-fb b{color:var(--blue)}
 .brand-sep{width:1px;height:28px;background:#3a3944}
-.brand-app{font:800 13px/1.15 var(--fh);text-transform:uppercase;letter-spacing:.8px}
-.brand-app small{display:block;font:500 11px var(--fb);letter-spacing:.2px;text-transform:none;color:#a9a9b2}
+.brand-app{font:900 17px/1 var(--fh);text-transform:uppercase;letter-spacing:-.2px;color:#fff}
+.brand-app b{font-weight:900;display:block;white-space:nowrap}
+.brand-app b span{color:var(--blue)}
+.brand-app small{display:flex;align-items:center;gap:8px;margin-top:5px;font:800 10.5px var(--fh);letter-spacing:4px;text-transform:uppercase;color:#fff}
+.brand-app small i{width:18px;height:3px;background:var(--blue);display:block;flex:none}
 .top nav{margin-left:auto;display:flex;gap:6px}
-.navbtn{background:none;border:0;color:#d6d6dc;font:700 12.5px var(--fh);text-transform:uppercase;letter-spacing:.8px;padding:8px 10px;border-radius:6px;cursor:pointer}
-.navbtn.on,.navbtn:hover{color:#fff;background:#2a2934}
+.navbtn{position:relative;display:inline-flex;align-items:center;gap:7px;background:none;border:0;color:#a9a9b2;font:800 12.5px var(--fh);text-transform:uppercase;letter-spacing:2px;padding:10px 12px;cursor:pointer;transition:color .15s}
+.navbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.navbtn::after{content:'';position:absolute;left:12px;right:12px;bottom:2px;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.navbtn:hover{color:#fff}
+.navbtn.on{color:#fff}
+.navbtn.on::after{transform:scaleX(1)}
+#navAdmin{border:1.5px solid #3a3946;border-radius:8px;padding:8px 12px;margin-left:6px}
+#navAdmin::after{display:none}
+#navAdmin:hover,#navAdmin.on{border-color:var(--blue);color:var(--blue)}
 .topline{background:#fff;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--grey);text-align:center;padding:6px 12px}
 .topline b{color:var(--ink)}
 #demo{background:var(--lime);color:var(--ink);font-size:12.5px;text-align:center;padding:6px 12px;font-weight:600}
@@ -261,6 +271,28 @@ body.dark footer button:hover{color:#fff}
 .mbar .mhead small{display:block;font-size:13px;color:var(--grey);margin-top:2px;line-height:1.4}
 .mav,.mico{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font:900 18px var(--fh);flex:none;text-transform:uppercase}
 .mico .ico{width:22px;height:22px}
+.hero2{margin:6px 0 22px}
+.hero2 .hk{display:flex;align-items:center;gap:12px;font:800 12px var(--fh);text-transform:uppercase;letter-spacing:4px;color:#fff;margin:0 0 10px}
+.hero2 .hk i{width:34px;height:4px;background:var(--blue);display:block;flex:none}
+.hero2 .hh{font:900 clamp(40px,8.5vw,76px)/.92 var(--fh);text-transform:uppercase;letter-spacing:-1.5px;color:#fff;margin:0}
+.hero2 .hh span{color:var(--blue);display:block}
+.hero2 .lead{margin-top:14px}
+.hero2 .hrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;align-items:stretch}
+.hero2 .hstats{display:flex;gap:12px}
+.hero2 .hs{background:rgba(0,0,0,.62);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px 18px;display:flex;flex-direction:column;justify-content:center;min-width:96px;backdrop-filter:blur(6px)}
+.hero2 .hs b{font:900 34px/1 var(--fh);color:var(--blue)}
+.hero2 .hs span{font:700 11px var(--fh);text-transform:uppercase;letter-spacing:1.5px;color:#fff;margin-top:4px}
+.hero2 .hnext{flex:1;min-width:260px;display:flex;align-items:center;gap:14px;text-align:left;background:var(--blue);color:#000;border:0;border-radius:14px;padding:12px 16px;cursor:pointer;text-shadow:none;transition:transform .15s,box-shadow .15s}
+.hero2 .hnext:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,159,227,.35)}
+.hero2 .hd{background:#000;color:#fff;border-radius:10px;width:58px;height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 11px var(--fh);text-transform:uppercase;letter-spacing:1px;flex:none}
+.hero2 .hd b{font:900 24px/1 var(--fh);color:var(--blue)}
+.hero2 .ht{display:flex;flex-direction:column;min-width:0;flex:1}
+.hero2 .ht small{font:800 10.5px var(--fh);text-transform:uppercase;letter-spacing:1.5px;opacity:.75}
+.hero2 .ht b{font:900 19px/1.15 var(--fh);text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hero2 .ht .hm{font:600 12.5px var(--fb);text-transform:none;letter-spacing:0;opacity:.85;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hero2 .hfull{align-self:flex-start;font:800 10px var(--fh);font-style:normal;text-transform:uppercase;background:#000;color:#fff;border-radius:4px;padding:3px 7px;margin:4px 0 3px;letter-spacing:1.2px;white-space:nowrap}
+.hero2 .ha{flex:none;display:flex}.hero2 .ha .ico{width:22px;height:22px}
+body:not(.dark) .hero2 .hk,body:not(.dark) .hero2 .hh{color:var(--ink)}
 .storesec{margin:44px 0 0}
 .storesec .shd{display:flex;align-items:center;gap:12px;margin:0 0 14px;font:800 12px var(--fh);text-transform:uppercase;letter-spacing:3px;color:#fff}
 .storesec .shd i{width:34px;height:4px;background:var(--blue);display:block;flex:none}
@@ -298,12 +330,17 @@ body.dark footer button:hover{color:#fff}
   .qrwrap{grid-template-columns:1fr}
   .grid2,.cols2{grid-template-columns:1fr}
   .h1{font-size:25px}
-  .brand-sep,.brand-app small,.topline{display:none}
+  .brand-sep,.topline{display:none}
   .top .wrap{gap:10px}
-  .logo{height:22px}
+  .logo{height:30px}
   .logo-fb{font-size:15px;white-space:nowrap}
-  .brand-app{font-size:10.5px;letter-spacing:.4px;line-height:1.2;max-width:84px}
-  .navbtn{padding:7px 6px;font-size:11px;letter-spacing:.4px}
+  .brand-app{font-size:13px}
+  .brand-app small{font-size:8.5px;letter-spacing:3px;margin-top:4px}
+  .brand-app small i{width:12px}
+  .navbtn{padding:8px 6px;font-size:11px;letter-spacing:1px;gap:5px}
+  .navbtn svg{display:none}
+  .navbtn::after{left:6px;right:6px}
+  #navAdmin{padding:6px 8px;margin-left:2px}
   .arow{flex-wrap:wrap}.arow .actions{width:100%;justify-content:flex-start}
   .prow{flex-direction:column}.pact{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
   .hbar{grid-template-columns:110px 1fr 34px}
@@ -317,10 +354,10 @@ body.dark footer button:hover{color:#fff}
   <div class="wrap">
     <span id="logoSlot"></span>
     <span class="brand-sep"></span>
-    <div class="brand-app">Running Club Avignon<small>Testings & événements</small></div>
+    <div class="brand-app"><b>Running <span>Club</span></b><small><i></i>Avignon</small></div>
     <nav>
-      <button class="navbtn" data-act="home" id="navHome">Testings</button>
-      <button class="navbtn" data-act="admin" id="navAdmin">Orga</button>
+      <button class="navbtn" data-act="home" id="navHome"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Testings</button>
+      <button class="navbtn" data-act="admin" id="navAdmin"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Orga</button>
     </nav>
   </div>
 </header>
@@ -352,7 +389,7 @@ if (window.RCA_BG) document.documentElement.style.setProperty('--bgimg', 'url("'
    ========================================================= */
 const CONFIG = {
   // Logo blanc (fond noir). Remplacez par l'URL de votre propre fichier si besoin.
-  logoUrl: 'https:\/\/www.running-conseil.com/media/athlete2/default/Logo-RC-Blanc-Horizontal.png',
+  logoUrl: 'data:image/png;base64,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',   // logo horizontal Running Conseil Avignon (blanc)
   // Laisser vide : l'adresse de l'app est détectée automatiquement. À remplir seulement si vous utilisez un lien court.
   appUrl: 'https:\/\/running-conseil-avignon.github.io/running-club-avignon/',
   // Adresse du script Google (base de données) utilisée quand la page est hébergée hors Google.
@@ -541,6 +578,7 @@ const store = {
 
 const ICON = {
   pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h7"/>',
   mount: '<path d="M3 20l6-10 4 6 3-4 5 8z"/>',
@@ -710,11 +748,7 @@ function vList() {
   else if (!list.length) body = `<div class="card empty"><b>${S.filter === 'avenir' ? 'Aucun testing programmé pour le moment' : 'Aucun testing passé'}</b>${S.filter === 'avenir' ? 'Repasse bientôt, de nouvelles dates arrivent.' : ''}</div>`;
   else body = `<div class="list">${list.map(cardHTML).join('')}</div>`;
   return `
-  <section class="hero">
-    <p class="kicker">Running Club Avignon</p>
-    <h1 class="h1">Nos <u>événements</u></h1>
-    <p class="lead">Tests produits, sorties club, reconnaissances et collaborations. Choisis ton événement et inscris-toi en une minute.</p>
-  </section>
+  ${heroHTML(avenir, passes)}
   ${memberBar()}
   <div class="toolbar">
     <div class="seg">
@@ -725,6 +759,30 @@ function vList() {
   </div>
   ${body}
   ${storeCard()}`;
+}
+function heroHTML(avenir, passes) {
+  const next = avenir.find(t => t.statut !== 'Annulé') || null;
+  let nx = '';
+  if (next && next.date) {
+    const d = new Date(next.date + 'T12:00:00'), h = horaire(next), cap = parseInt(next.capacite, 10) || 0;
+    const full = next.placesRestantes === 0 || (cap > 0 && (parseInt(next.inscrits, 10) || 0) >= cap);
+    nx = `<button class="hnext" data-act="open" data-id="${esc(next.id)}" aria-label="Voir ${esc(next.titre)}">
+      <span class="hd"><b>${String(d.getDate()).padStart(2, '0')}</b>${MOIS[d.getMonth()].replace('.', '')}</span>
+      <span class="ht"><small>Prochain event</small>${full ? '<em class="hfull">Complet · liste d\'attente</em>' : ''}<b>${esc(next.titre)}</b>${h || next.lieu ? `<small class="hm">${esc([h, next.lieu].filter(Boolean).join(' · '))}</small>` : ''}</span>
+      <span class="ha">${ico('arrow')}</span></button>`;
+  }
+  return `<section class="hero hero2">
+    <div class="hk"><i></i>Tests · Sorties · Collabs</div>
+    <h1 class="hh">Nos <span>événements</span></h1>
+    <p class="lead">Tests produits, sorties club, reconnaissances et collaborations. Choisis ton événement et inscris-toi en une minute.</p>
+    <div class="hrow">
+      <div class="hstats">
+        <div class="hs"><b>${S.loading ? '–' : avenir.length}</b><span>à venir</span></div>
+        ${passes.length >= 5 ? `<div class="hs"><b>${passes.length}</b><span>déjà organisés</span></div>` : ''}
+      </div>
+      ${nx}
+    </div>
+  </section>`;
 }
 function storeCard() {
   const adr = '240 chemin de Panisset, 84130 Le Pontet';
@@ -1561,7 +1619,7 @@ document.addEventListener('submit', e => {
   const slot = document.getElementById('logoSlot');
   const fb = () => { slot.innerHTML = '<span class="logo-fb">running <b>conseil</b></span>'; };
   if (!CONFIG.logoUrl) return fb();
-  const img = new Image(); img.className = 'logo'; img.alt = 'Running Conseil'; img.onerror = fb; img.src = CONFIG.logoUrl;
+  const img = new Image(); img.className = 'logo'; img.alt = 'Running Conseil Avignon'; img.onerror = fb; img.src = CONFIG.logoUrl;
   slot.appendChild(img);
 })();
 
