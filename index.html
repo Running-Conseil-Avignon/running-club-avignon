@@ -198,6 +198,8 @@ legend{font:800 13px var(--fh);text-transform:uppercase;letter-spacing:1.2px;col
 .cols2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .pad{padding:16px 18px}
 .h3{font:800 14px var(--fh);text-transform:uppercase;letter-spacing:1px;color:var(--ink);margin:0 0 12px}
+.cols2 .card.pad .h3{display:flex;align-items:center;gap:10px;letter-spacing:2px}
+.cols2 .card.pad .h3::before{content:"";width:22px;height:4px;background:var(--blue);display:block;flex:none}
 
 /* Divers */
 footer{border-top:1px solid var(--line);background:#fff;color:var(--grey);font-size:12.5px}
@@ -293,6 +295,38 @@ body.dark footer button:hover{color:#fff}
 .hero2 .hfull{align-self:flex-start;font:800 10px var(--fh);font-style:normal;text-transform:uppercase;background:#000;color:#fff;border-radius:4px;padding:3px 7px;margin:4px 0 3px;letter-spacing:1.2px;white-space:nowrap}
 .hero2 .ha{flex:none;display:flex}.hero2 .ha .ico{width:22px;height:22px}
 body:not(.dark) .hero2 .hk,body:not(.dark) .hero2 .hh{color:var(--ink)}
+/* ====== Orga (charte) ====== */
+.ohero{background:#000;color:#fff;border-radius:18px;padding:26px 24px 22px;margin:6px 0 18px;position:relative;overflow:hidden}
+.ohero::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border:22px solid var(--blue);border-radius:50%;opacity:.14}
+.ohk{display:flex;align-items:center;gap:12px;font:800 12px var(--fh);text-transform:uppercase;letter-spacing:4px;color:#fff;margin:0 0 10px}
+.ohk i{width:34px;height:4px;background:var(--blue);display:block;flex:none}
+.ohh{font:900 clamp(32px,6.5vw,56px)/.95 var(--fh);text-transform:uppercase;letter-spacing:-1px;color:#fff;margin:0 0 20px}
+.ohh span{color:var(--blue)}
+.ostats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;position:relative;z-index:1}
+.otile{background:#17161D;border:1px solid #2B2A35;border-radius:14px;padding:14px 16px}
+.otile .on{font:900 34px/1 var(--fh);color:#fff}
+.otile .on small{font-size:16px;color:var(--blue);margin-left:2px}
+.otile .ol{font:800 10.5px var(--fh);text-transform:uppercase;letter-spacing:1.5px;color:#a9a9b2;margin-top:8px}
+.otile.acc{background:var(--blue);border-color:var(--blue)}.otile.acc .on{color:#000}.otile.acc .ol{color:#000;opacity:.75}
+.obar{height:5px;background:#2B2A35;border-radius:5px;margin-top:10px;overflow:hidden}.obar i{display:block;height:100%;background:var(--blue);border-radius:5px}
+.otools .seg{background:transparent;border:0;padding:0;gap:4px}
+.otools .seg button{position:relative;border-radius:0;padding:10px 12px;color:var(--grey);letter-spacing:2px;font-weight:800}
+.otools .seg button.on{background:none;color:var(--ink)}
+.otools .seg button.on::after{content:'';position:absolute;left:12px;right:12px;bottom:0;height:3px;background:var(--blue)}
+.ogrp{display:flex;align-items:center;gap:12px;margin:18px 0 10px;font:800 12px var(--fh);text-transform:uppercase;letter-spacing:3px;color:var(--ink)}
+.ogrp i{width:28px;height:4px;background:var(--blue);display:block}
+.ogrp small{font:800 11px var(--fh);background:var(--ink);color:#fff;border-radius:20px;padding:2px 8px;letter-spacing:0}
+.orow{border-left:5px solid var(--line)}
+.orow.st-ok{border-left-color:var(--blue)}.orow.st-closed{border-left-color:var(--ink)}.orow.st-ko{border-left-color:#d64545}
+.orow.st-draft{border-left-style:dashed;border-left-color:#b9b9c2;background:repeating-linear-gradient(135deg,#fff 0 14px,#fafafa 14px 28px)}
+.orow.st-done{opacity:.82}
+.orow .dateblk{background:#000;border-radius:12px;padding:8px 4px;width:58px}
+.orow .dateblk .w{color:#a9a9b2}.orow .dateblk .d{color:#fff}.orow .dateblk .m{color:var(--blue)}
+.ofill{display:flex;align-items:center;gap:10px;margin-top:8px;max-width:420px}
+.ofl{font-size:13px;color:var(--grey);white-space:nowrap}.ofl b{font:900 15px var(--fh);color:var(--ink)}.ofl em{font-style:normal;font-weight:800;color:var(--blue-d);text-transform:uppercase;font-size:11px;letter-spacing:1px}
+.otrk{flex:1;height:7px;background:var(--soft);border-radius:7px;overflow:hidden}.otrk i{display:block;height:100%;background:var(--blue);border-radius:7px}
+.orow .actions .ico{width:15px;height:15px}
+@media (max-width:640px){.ohero{padding:20px 16px 16px;border-radius:14px}.ostats{grid-template-columns:repeat(2,1fr)}.otile .on{font-size:28px}.ostats .otile.acc{grid-column:span 2}}
 .storesec{margin:44px 0 0}
 .storesec .shd{display:flex;align-items:center;gap:12px;margin:0 0 14px;font:800 12px var(--fh);text-transform:uppercase;letter-spacing:3px;color:#fff}
 .storesec .shd i{width:34px;height:4px;background:var(--blue);display:block;flex:none}
@@ -1031,16 +1065,20 @@ function vAdmin() {
   if (!S.admin) return `<div class="list"><div class="skel"></div><div class="skel"></div></div>`;
   const st = computeStats();
   const tabs = `<div class="seg"><button class="${S.adminTab === 'testings' ? 'on' : ''}" data-act="atab" data-v="testings">Testings</button><button class="${S.adminTab === 'data' ? 'on' : ''}" data-act="atab" data-v="data">Données</button>${S.membresOff ? '' : `<button class="${S.adminTab === 'membres' ? 'on' : ''}" data-act="atab" data-v="membres">Membres</button>`}</div>`;
+  const tile = (n, l, pct, cls) => `<div class="otile ${cls || ''}"><div class="on">${n ?? '–'}${pct && n !== null ? '<small>%</small>' : ''}</div><div class="ol">${l}</div>${pct && n !== null ? `<div class="obar"><i style="width:${Math.min(100, n)}%"></i></div>` : ''}</div>`;
   const head = `
-  <section class="hero"><p class="kicker">Espace organisateurs</p><h1 class="h1">Pilotage <u>testings</u></h1></section>
-  <div class="stats">
-    <div class="card stat accent"><div class="n">${st.upcoming}</div><div class="l">Testings à venir</div></div>
-    <div class="card stat"><div class="n">${st.inscriptions}</div><div class="l">Inscriptions</div></div>
-    <div class="card stat"><div class="n">${st.uniques}</div><div class="l">Coureurs uniques</div></div>
-    <div class="card stat"><div class="n">${st.fill ?? '–'}<small>${st.fill !== null ? '%' : ''}</small></div><div class="l">Remplissage à venir</div></div>
-    <div class="card stat"><div class="n">${st.presence ?? '–'}<small>${st.presence !== null ? '%' : ''}</small></div><div class="l">Taux de présence</div></div>
-  </div>
-  <div class="sectionhead">${tabs}<div class="actions">
+  <section class="ohero">
+    <div class="ohk"><i></i>Espace organisateurs</div>
+    <h1 class="ohh">Pilotage <span>testings</span></h1>
+    <div class="ostats">
+      ${tile(st.upcoming, 'Testings à venir', false, 'acc')}
+      ${tile(st.inscriptions, 'Inscriptions')}
+      ${tile(st.uniques, 'Coureurs uniques')}
+      ${tile(st.fill, 'Remplissage à venir', true)}
+      ${tile(st.presence, 'Taux de présence', true)}
+    </div>
+  </section>
+  <div class="sectionhead otools">${tabs}<div class="actions">
     <button class="btn btn-primary btn-sm" data-act="newT">${ico('plus')} Nouveau testing</button>
     <button class="btn btn-ghost btn-sm" data-act="exportAll">${ico('dl')} Export CSV</button>
     <button class="btn btn-ghost btn-sm" data-act="logout">Déconnexion</button>
@@ -1067,23 +1105,28 @@ function vAdmin() {
     return pa ? String(b.date).localeCompare(String(a.date)) : String(a.date).localeCompare(String(b.date));
   });
   if (!ts.length) return head + `<div class="card empty"><b>Aucun testing</b>Crée ton premier testing pour ouvrir les inscriptions.</div>`;
-  return head + `<div class="list">${ts.map(t => {
-    const c = counts(t.id), cap = parseInt(t.capacite, 10) || 0;
-    return `<div class="card arow">
+  const row = t => {
+    const c = counts(t.id), cap = parseInt(t.capacite, 10) || 0, pct = cap ? Math.min(100, Math.round(c.inscrits / cap * 100)) : null;
+    const stc = { 'Ouvert': 'ok', 'Brouillon': 'draft', 'Inscriptions closes': 'closed', 'Terminé': 'done', 'Annulé': 'ko' }[t.statut] || 'done';
+    return `<div class="card arow orow st-${stc}">
       ${dateBlk(t.date)}
       <div class="grow">
         <div class="tags">${stPill(t.statut)}${t.type ? `<span class="pill out">${esc(t.type)}</span>` : ''}${t.collaboration ? `<span class="pill lime">${esc(t.collaboration)}</span>` : ''}</div>
         <b class="t">${esc(t.titre)}</b>
-        <div class="meta"><span>${ico('users')}${c.inscrits}${cap ? '/' + cap : ''} inscrits</span>${c.attente ? `<span>${ico('hour')}${c.attente} en attente</span>` : ''}${isPast(t) && (c.presents + c.absents) ? `<span>${ico('check')}${c.presents} présents</span>` : ''}${t.lieu ? `<span>${ico('pin')}${esc(t.lieu)}</span>` : ''}</div>
+        <div class="meta">${c.attente ? `<span>${ico('hour')}${c.attente} en attente</span>` : ''}${isPast(t) && (c.presents + c.absents) ? `<span>${ico('check')}${c.presents} présent${c.presents > 1 ? 's' : ''}</span>` : ''}${t.lieu ? `<span>${ico('pin')}${esc(t.lieu)}</span>` : ''}</div>
+        <div class="ofill"><span class="ofl"><b>${c.inscrits}</b>${cap ? ' / ' + cap : ''} inscrit${c.inscrits > 1 ? 's' : ''}${pct !== null && pct >= 100 ? ' · <em>complet</em>' : ''}</span>${cap ? `<span class="otrk"><i style="width:${pct}%"></i></span>` : ''}</div>
       </div>
       <div class="actions">
-        <button class="btn btn-dark btn-sm" data-act="parts" data-id="${esc(t.id)}">Inscrits</button>
+        <button class="btn btn-dark btn-sm" data-act="parts" data-id="${esc(t.id)}">${ico('users')} Inscrits</button>
         <button class="btn btn-primary btn-sm" data-act="qr" data-id="${esc(t.id)}">QR code</button>
         <button class="btn btn-ghost btn-sm" data-act="editT" data-id="${esc(t.id)}">Modifier</button>
         <button class="btn btn-ghost btn-sm" data-act="dupT" data-id="${esc(t.id)}" title="Créer un nouveau testing à partir de celui-ci">Dupliquer</button>
       </div>
     </div>`;
-  }).join('')}</div>`;
+  };
+  const fut = ts.filter(t => !isPast(t)), old = ts.filter(isPast);
+  const grp = (label, arr) => arr.length ? `<div class="ogrp"><i></i>${label}<small>${arr.length}</small></div><div class="list">${arr.map(row).join('')}</div>` : '';
+  return head + grp('À venir', fut) + grp('Passés', old);
 }
 
 /* ---------- Organisateurs : édition testing ---------- */
