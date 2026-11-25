@@ -261,7 +261,16 @@ body.dark footer button:hover{color:#fff}
 .mbar .mhead small{display:block;font-size:13px;color:var(--grey);margin-top:2px;line-height:1.4}
 .mav,.mico{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font:900 18px var(--fh);flex:none;text-transform:uppercase}
 .mico .ico{width:22px;height:22px}
-.store{margin:22px 0 0}
+.storesec{margin:44px 0 0}
+.storesec .shd{display:flex;align-items:center;gap:12px;margin:0 0 14px;font:800 12px var(--fh);text-transform:uppercase;letter-spacing:3px;color:#fff}
+.storesec .shd i{width:34px;height:4px;background:var(--blue);display:block;flex:none}
+.store{margin:0;background:#000!important;border:1px solid #2b2a35!important}
+.store .mhead b{color:#fff!important}
+.store .mhead small{color:#b9b9c2!important}
+.store .sadr{border-top-color:#2b2a35!important;color:#b9b9c2!important}
+.store .sadr b{color:#fff!important}
+.store .btn-ghost{background:transparent!important;color:#fff!important;border-color:#4a4956!important}
+.store .btn-ghost:hover{border-color:var(--blue)!important;color:var(--blue)!important}
 .store .sadr{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;border-top:1px solid var(--line);padding-top:12px;font-size:13.5px;color:var(--grey);line-height:1.5}
 .store .sadr b{color:var(--ink)}
 .store .sbtn{display:flex;gap:8px;flex-wrap:wrap}
@@ -720,12 +729,12 @@ function vList() {
 function storeCard() {
   const adr = '240 chemin de Panisset, 84130 Le Pontet';
   const maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Running Conseil Avignon ' + adr);
-  return `<div class="card mbar store">
+  return `<section class="storesec"><div class="shd"><i></i>La boutique</div><div class="card mbar store">
     <div class="mhead"><span class="mico">${ico('pin')}</span>
       <div><b>En attendant, rendez-vous en boutique</b><small>Chaussures, textile, nutrition, étude de foulée… Passe découvrir notre univers running et échanger avec l'équipe.</small></div></div>
     <div class="sadr"><span><b>Running Conseil Avignon</b><br>${adr}</span>
       <span class="sbtn"><a class="btn btn-ghost btn-sm" href="${maps}" target="_blank" rel="noopener">${ico('ext')} Itinéraire</a><a class="btn btn-ghost btn-sm" href="tel:+33490395287">04 90 39 52 87</a><a class="btn btn-ghost btn-sm" style="text-transform:none;letter-spacing:.2px" href="mailto:avignon@running-conseil.com">${ico('mail')} avignon@running-conseil.com</a></span></div>
-  </div>`;
+  </div></section>`;
 }
 
 /* ---------- Public : fiche ---------- */
